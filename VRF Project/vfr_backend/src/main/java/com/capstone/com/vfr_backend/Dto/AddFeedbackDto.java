@@ -1,7 +1,5 @@
 package com.capstone.com.vfr_backend.Dto;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -14,9 +12,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddFeedbackDto {
-    private Integer rating;
+    private Integer OverallRating;
+    private Integer qsRating;
+    private Integer vmRating;
+    private Integer csRating;
+    private Integer euRating;
     private String comment;
-    private LocalDateTime feedbackTime;
+    private String pros;
+    private String cons;
+    
 
     // Instead of embedding full User and VASPack (to avoid recursion)
     private Long userId;

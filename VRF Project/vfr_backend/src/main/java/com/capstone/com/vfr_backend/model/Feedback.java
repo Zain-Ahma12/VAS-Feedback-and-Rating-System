@@ -86,5 +86,4 @@ public class Feedback {
     @ManyToOne
     @JoinColumn(name = "vas_pack_id", nullable=false)// owning side
     private VASPack vasPack;
-    
 }

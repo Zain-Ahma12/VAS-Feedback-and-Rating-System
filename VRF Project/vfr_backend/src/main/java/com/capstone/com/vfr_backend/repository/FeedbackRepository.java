@@ -18,4 +18,5 @@ public interface  FeedbackRepository extends JpaRepository<Feedback, Long>{
     @Query(value = "SELECT AVG(overallRating) FROM feedback WHERE vas_pack_id = ?1", nativeQuery = true)
     Optional<Double> findAverageOverallRatingByVasPackId(Long vasPackId);
     
+    
 }
