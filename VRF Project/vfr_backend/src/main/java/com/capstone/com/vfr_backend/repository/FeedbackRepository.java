@@ -12,10 +12,10 @@ public interface  FeedbackRepository extends JpaRepository<Feedback, Long>{
 
     List<Feedback> findByUsers_UserId(Long userId);
 
-    @Query("SELECT AVG(f.rating) FROM Feedback f")
-    Optional<Double> findAverageRating();
+    @Query("SELECT AVG(f.overallRating) FROM Feedback f")
+    Optional<Double> findAverageOverallRating();
 
-    @Query(value = "SELECT AVG(rating) FROM feedback WHERE vas_pack_id = ?1", nativeQuery = true)
-    Optional<Double> findAverageRatingByVasPackId(Long vasPackId);
+    @Query(value = "SELECT AVG(overallRating) FROM feedback WHERE vas_pack_id = ?1", nativeQuery = true)
+    Optional<Double> findAverageOverallRatingByVasPackId(Long vasPackId);
     
 }

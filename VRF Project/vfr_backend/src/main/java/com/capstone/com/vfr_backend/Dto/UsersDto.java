@@ -15,6 +15,7 @@ public class UsersDto {
     private Long userId;
     private String username;
     private String email;
+    private String phone;
     private UserType role;
     private LocalDateTime createdAt;
 

@@ -52,6 +52,11 @@ public class Users {
     @Size(min = 8)
     private String password;
 
+    @Column(name= "phone_number", nullable = false)
+    @NotNull
+    @Size(max = 10)
+    private String phone; 
+
     @Enumerated(EnumType.STRING)
     private UserType role; // e.g., "USER" or "ADMIN"
 

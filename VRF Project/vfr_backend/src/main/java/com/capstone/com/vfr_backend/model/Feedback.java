@@ -30,15 +30,48 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
     
+
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(columnDefinition = "TINYINT(1)")
-    private Integer rating;
+    @Column(name = "Overall_rating",columnDefinition = "TINYINT(1)")
+    private Integer overallRating; // Over all rating
+
+    @NotNull(message = "Rating is required")
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
+    @Column(name = "Quality_of_Service_rating",columnDefinition = "TINYINT(1)")
+    private Integer qsRating; // Quality of Service rating
+
+    @NotNull(message = "Rating is required")
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
+    @Column(name = "Value_for_Money_rating", columnDefinition = "TINYINT(1)")
+    private Integer vmRating; // Value for Money rating
+
+    @NotNull(message = "Rating is required")
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
+    @Column(name = "Customer_Support_rating", columnDefinition = "TINYINT(1)")
+    private Integer csRating; //Customer Support rating
+
+    @NotNull(message = "Rating is required")
+    @Min(value = 1, message = "Rating must be at least 1")
+    @Max(value = 5, message = "Rating must be at most 5")
+    @Column(name= "Ease_of_Use_rating" ,columnDefinition = "TINYINT(1)")
+    private Integer euRating; //Ease of Use rating
 
     @Size(max = 1000, message = "Comment must not exceed 1000 characters")
     @Column(columnDefinition = "TEXT")
     private String comment;
+
+    @Size(max = 100)
+    @Column(columnDefinition = "TEXT")
+    private String pros;
+
+    @Size(max = 100)
+    @Column(columnDefinition = "TEXT")
+    private String cons;
 
     @CreationTimestamp
     @Column(name = "feedback_time", nullable = false, updatable = false)

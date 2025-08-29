@@ -5,15 +5,20 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.capstone.com.vfr_backend.Dto.AddFeedbackDto;
+import com.capstone.com.vfr_backend.Dto.AddVASPackDto;
 import com.capstone.com.vfr_backend.Dto.FeedbackDto;
 import com.capstone.com.vfr_backend.Dto.UsersDto;
+import com.capstone.com.vfr_backend.Dto.VASPackDto;
 import com.capstone.com.vfr_backend.model.Feedback;
 import com.capstone.com.vfr_backend.model.UType.UserType;
 import com.capstone.com.vfr_backend.model.Users;
+import com.capstone.com.vfr_backend.model.VASPack;
 import com.capstone.com.vfr_backend.repository.FeedbackRepository;
 import com.capstone.com.vfr_backend.repository.UsersRepository;
 import com.capstone.com.vfr_backend.repository.VASPackRepository;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -70,17 +75,46 @@ public class AdminService {
 
     }
 
-    public Double getAverageRating() {
-        return feedbackRepository.findAverageRating().orElse(0.0);
+    public Double getAverageOverallRating() {
+        return feedbackRepository.findAverageOverallRating().orElse(0.0);
     }
 
-    public Double getAverageRatingForPack(Long vasPackId) {
+    public Double getAverageOverallRatingForPack(Long vasPackId) {
         if (vasPackId == null || vasPackId <= 0) {
             throw new IllegalArgumentException("Invalid vasPackId: " + vasPackId);
         }
-        return feedbackRepository.findAverageRatingByVasPackId(vasPackId).orElse(0.0);
+        return feedbackRepository.findAverageOverallRatingByVasPackId(vasPackId).orElse(0.0);
     }
 
+    public Long getTotalFeedbackCount() {
+        return feedbackRepository.count();
+    }
+
+    public Long getTotalUsersCount() {
+        return usersRepository.count();
+    }
+
+    public Long getTotalServiceCount() {
+        return vasPackRepository.count();
+    }
+
+    public String deleteVasPack(Long packId) {
+        if (feedbackRepository.existsById(packId)) {
+            feedbackRepository.deleteById(packId);
+            return "Feedback deleted successfully";
+        } else {
+            throw new RuntimeException("Feedback not found with ID: " + packId);
+        }
+        
+    }
+
+    public String addVasPack(AddVASPackDto addVASPackDto) {
+        VASPack vasPack = modelMapper.map(addVASPackDto, VASPack.class);
+        vasPackRepository.save(vasPack);
+        return "VAS Pack added";
+    }
+
+    
     
     
 }
