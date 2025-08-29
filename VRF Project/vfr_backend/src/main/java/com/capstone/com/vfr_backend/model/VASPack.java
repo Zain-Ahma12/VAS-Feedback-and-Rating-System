@@ -1,5 +1,6 @@
 package com.capstone.com.vfr_backend.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,18 @@ public class VASPack {
     @Size(min = 10, max = 500, message = "Description must be between 10 and 500 characters")
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
+
+    @NotBlank(message = "Price is required")
+    @Column(name = "price", nullable = false)
+    private double price;
+
+    @NotBlank(message = "Launch Date is required")
+    @Column(name = "launch_date", nullable = false)
+    private LocalDate launchDate;
+
+    @NotBlank(message = "Serivce type is required")
+    @Column(name = "service_type", nullable = false)
+    private String serviceType;
     
     // One VASPack can have many Feedback
     @OneToMany(mappedBy="vasPack", orphanRemoval = true) // inverse side
