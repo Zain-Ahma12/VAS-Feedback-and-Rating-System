@@ -42,6 +42,10 @@ public class VASPack {
     @Column(name = "launch_date", nullable = false)
     private LocalDate launchDate;
 
+    @NotBlank(message = "Status is required")
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
     @NotBlank(message = "Serivce type is required")
     @Column(name = "service_type", nullable = false)
     private String serviceType;

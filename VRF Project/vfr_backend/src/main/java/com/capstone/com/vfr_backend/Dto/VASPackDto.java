@@ -16,6 +16,7 @@ public class VASPackDto {
     private String description;
     private double price;
     private LocalDate launchDate;
+    private boolean status;
     private String serviceType;
 
     // Option 1: Only feedback IDs (lightweight, safe for most APIs)

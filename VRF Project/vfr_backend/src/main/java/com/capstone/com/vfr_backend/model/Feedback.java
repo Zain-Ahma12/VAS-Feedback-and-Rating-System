@@ -34,31 +34,31 @@ public class Feedback {
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(name = "Overall_rating",columnDefinition = "TINYINT(1)")
+    @Column(name = "Overall_rating")
     private Integer overallRating; // Over all rating
 
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(name = "Quality_of_Service_rating",columnDefinition = "TINYINT(1)")
+    @Column(name = "Quality_of_Service_rating")
     private Integer qsRating; // Quality of Service rating
 
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(name = "Value_for_Money_rating", columnDefinition = "TINYINT(1)")
+    @Column(name = "Value_for_Money_rating")
     private Integer vmRating; // Value for Money rating
 
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(name = "Customer_Support_rating", columnDefinition = "TINYINT(1)")
+    @Column(name = "Customer_Support_rating")
     private Integer csRating; //Customer Support rating
 
     @NotNull(message = "Rating is required")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    @Column(name= "Ease_of_Use_rating" ,columnDefinition = "TINYINT(1)")
+    @Column(name= "Ease_of_Use_rating")
     private Integer euRating; //Ease of Use rating
 
     @Size(max = 1000, message = "Comment must not exceed 1000 characters")
@@ -66,16 +66,16 @@ public class Feedback {
     private String comment;
 
     @Size(max = 100)
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "VARCHAR(100)")
     private String pros;
 
     @Size(max = 100)
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "VARCHAR(100)")
     private String cons;
 
     @CreationTimestamp
     @Column(name = "feedback_time", nullable = false, updatable = false)
-    private LocalDateTime FeedbackTime;
+    private LocalDateTime feedbackTime;
 
     // Many Feedback can have one Users
     @ManyToOne

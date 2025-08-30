@@ -1,5 +1,6 @@
 package com.capstone.com.vfr_backend.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.capstone.com.vfr_backend.Dto.AddVASPackDto;
 import com.capstone.com.vfr_backend.Dto.FeedbackDto;
+import com.capstone.com.vfr_backend.Dto.FeedbackandRatingsDto;
 import com.capstone.com.vfr_backend.Dto.UsersDto;
 import com.capstone.com.vfr_backend.model.Feedback;
 import com.capstone.com.vfr_backend.model.UType.UserType;
@@ -111,7 +113,45 @@ public class AdminService {
         return "VAS Pack added";
     }
 
+    public List<FeedbackDto> getRecentFeedback() {
+        List<Feedback> feedbackList = feedbackRepository.FindRecentFeedbacks();
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
+    }
+
+    public List<FeedbackDto> getTopFeedback() {
+        List<Feedback> feedbackList = feedbackRepository.FindTop3Feedbacks();
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
     
     
-    
+}
+    public List<FeedbackDto> getLowestFeedback() {
+        List<Feedback> feedbackList = feedbackRepository.FindLowest3Feedbacks();
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
+    }
+
+    public List<FeedbackandRatingsDto> DisplayFeedbackandRatings() {
+        List<FeedbackandRatingsDto> feedbackList = feedbackRepository.DisplayFeedbackandRatings();
+        return feedbackList;
+    }
+
+    public List<FeedbackDto> getFilteredFeedbackbyRating(Integer overallRating) {
+        List<Feedback> feedbackList = feedbackRepository.findByOverallRating(overallRating);
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
+    }
+
+    public List<FeedbackDto> getFilteredFeedbackbyTime(LocalDateTime feedbackTime) {
+        List<Feedback> feedbackList = feedbackRepository.findByFeedbackTime(feedbackTime);
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
+    }
+
+    public List<FeedbackDto> getFilteredFeedbackbyVasPack(Long packId) {
+        List<Feedback> feedbackList = feedbackRepository.findByVasPack_PackId(packId);
+        return feedbackList.stream().map(f -> modelMapper.map(f, FeedbackDto.class)).toList();
+    }
+
+    public String updateVasPack(Long packId, AddVASPackDto addVASPackDto) {
+        VASPack vasPack = vasPackRepository.findById(packId).orElseThrow(() -> new IllegalArgumentException("No VASPack found with id: " + packId));
+        vasPack.setStatus(addVASPackDto.isStatus());
+        return "VAS Pack updated successfully";
+    }
 }

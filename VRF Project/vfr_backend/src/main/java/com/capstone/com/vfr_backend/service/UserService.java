@@ -78,4 +78,12 @@ public class UserService {
             throw new RuntimeException("Feedback not found with ID: " + id);
         }
     }
+
+    public String updateFeedback(Long feedbackId, AddFeedbackDto addfeedbackDto) {
+        Feedback feedback = feedbackRepository.findById(feedbackId).orElseThrow(() -> new IllegalArgumentException("No Feedback found with id: " + feedbackId));
+        modelMapper.map(addfeedbackDto, feedback);
+        feedbackRepository.save(feedback);
+        return "Feedback updated successfully";
+                
+    }
 }
